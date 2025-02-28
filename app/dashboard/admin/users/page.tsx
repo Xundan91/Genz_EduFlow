@@ -83,7 +83,7 @@ export default function UsersPage() {
                       </Badge>
                     </TableCell>
                     <TableCell>
-                      <Badge>
+                      <Badge >
                         {user.status}
                       </Badge>
                     </TableCell>
