@@ -1,5 +1,5 @@
 "use client"
-
+//auth/admin/page.tsx
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -28,14 +28,16 @@ export default function AdminLoginPage() {
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   setIsLoading(true);
-  
+  console.log("Attempting login with:", { email, provider: "admin" });
+
   try {
-    const result = await signIn("credentials", {
+    const result = await signIn("admin", {
       email,
       password,
       redirect: false,
     });
-    
+    console.log("Login result:", result);
+
     if (result?.error) {
       toast({
         title: "Login failed",

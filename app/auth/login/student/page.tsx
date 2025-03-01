@@ -26,7 +26,7 @@ export default function StudentLoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const result = await signIn("credentials", {
+    const result = await signIn("student", {
       redirect: false,
       email,
       password,

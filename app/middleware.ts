@@ -1,31 +1,30 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { NextRequest } from "next/server";
 
 export async function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
-  console.log(pathname);
-  
-  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-  console.log(token);
-  
-  const userRole = token?.role as string | undefined;
-  console.log(userRole);
+  const token = await getToken({ req });
+  const isAuthenticated = !!token;
 
-  // Protect routes based on role
-  if (pathname.startsWith("/admin") && userRole !== "ADMIN") {
-    return NextResponse.redirect(new URL("/unauthorized", req.url));
-  }
-  if (pathname.startsWith("/teacher") && userRole !== "TEACHER") {
-    return NextResponse.redirect(new URL("/unauthorized", req.url));
-  }
-  if (pathname.startsWith("/student") && userRole !== "STUDENT") {
-    return NextResponse.redirect(new URL("/unauthorized", req.url));
+  const path = req.nextUrl.pathname;
+
+  if (path.startsWith("/dashboard/admin")) {
+    if (!isAuthenticated || token.role !== "ADMIN") {
+      return NextResponse.redirect(new URL("/auth/login/admin", req.url));
+    }
+  } else if (path.startsWith("/dashboard/teacher")) {
+    if (!isAuthenticated || token.role !== "TEACHER") {
+      return NextResponse.redirect(new URL("/auth/login/teacher", req.url));
+    }
+  } else if (path.startsWith("/dashboard/student")) {
+    if (!isAuthenticated || token.role !== "STUDENT") {
+      return NextResponse.redirect(new URL("/auth/login/student", req.url));
+    }
   }
 
   return NextResponse.next();
 }
 
-// Apply middleware to these routes
 export const config = {
-  matcher: ["/admin/:path*", "/teacher/:path*", "/student/:path*"],
+  matcher: ["/dashboard/admin/:path*", "/dashboard/teacher/:path*", "/dashboard/student/:path*"],
 };
