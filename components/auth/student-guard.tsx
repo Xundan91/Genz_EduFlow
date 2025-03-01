@@ -1,20 +1,26 @@
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+// components/auth/admin-guard.tsx
+"use client"
 
-const StundentGuard = ({ children }: { children: React.ReactNode }) => {
-  const { data: session, status } = useSession();
-  const router = useRouter();
+import { useSession } from "next-auth/react"
+import { redirect } from "next/navigation"
+import { useEffect } from "react"
 
+export default function StudentGuard({ children }: { children: React.ReactNode }) {
+  const { data: session, status } = useSession()
+  
   useEffect(() => {
-    if (status === "loading") return;
-    if (!session || session.user.role !== "STUDENT") {
-      router.push("/auth/login/student");
+    if (status === "unauthenticated") {
+      redirect("/auth/login/stundent")
     }
-  }, [session, status, router]);
-
-  if (status === "loading") return <p>Loading...</p>;
-  return <>{children}</>;
-};
-
-export default StundentGuard;
+    
+    if (status === "authenticated" && session?.user?.role !== "STUDENT") {
+      redirect("/")
+    }
+  }, [session, status])
+  
+  if (status === "loading") {
+    return <div>Loading...</div>
+  }
+  
+  return <>{children}</>
+}
