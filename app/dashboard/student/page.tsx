@@ -3,9 +3,13 @@ import { DashboardShell } from "@/components/ui/dashboard-shell";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BookOpen, GraduationCap, Clock, Trophy } from "lucide-react";
+import StudentGuard from "@/components/auth/student-guard"
+import StundentGuard from "@/components/auth/student-guard";
 
 export default function StudentDashboard() {
   return (
+    <StundentGuard>
+
     <DashboardShell role="student">
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-7xl mx-auto space-y-6">
@@ -108,5 +112,6 @@ export default function StudentDashboard() {
       </div>
     </div>
     </DashboardShell>
+    </StundentGuard>
   );
 }

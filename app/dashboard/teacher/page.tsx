@@ -4,9 +4,11 @@ import { DashboardShell } from "@/components/ui/dashboard-shell";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Users, Clock, Award } from "lucide-react";
+import TeacherGuard from "@/components/auth/teacher-guard"
 
 export default function TeacherDashboard() {
   return (
+    <TeacherGuard>
     <DashboardShell role="teacher">
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-7xl mx-auto space-y-6">
@@ -109,5 +111,6 @@ export default function TeacherDashboard() {
       </div>
     </div>
     </DashboardShell>
+    </TeacherGuard>
   );
 }

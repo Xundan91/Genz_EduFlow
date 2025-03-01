@@ -1,5 +1,6 @@
-"use client"
+"use client";
 
+import { signIn } from "next-auth/react"; 
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -24,14 +25,28 @@ export default function StudentLoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // TODO: Implement actual authentication
-    toast({
-      title: "Login successful",
-      description: "Welcome back! Redirecting to student dashboard...",
+
+    const result = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+      role: "student", // Important for differentiating roles
     });
 
-    router.push("/dashboard/student");
+    if (result?.error) {
+      toast({
+        title: "Login failed",
+        description: result.error,
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Login successful",
+        description: "Redirecting to your student dashboard...",
+      });
+
+      router.push("/dashboard/student");
+    }
   };
 
   return (
