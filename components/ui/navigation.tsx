@@ -13,6 +13,7 @@ import {
   LogOut,
   Bell,
   Shield,
+  
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -55,29 +56,53 @@ const adminNavItems = [
     title: "Dashboard",
     href: "/dashboard/admin",
     icon: BarChart,
+  },{
+    title : "Teacher",
+    href : "/dashboard/admin/teacher",
+    icon : Users,
   },
   {
-    title: "Users",
+    title: "Student",
     href: "/dashboard/admin/users",
     icon: Users,
   },
   {
-    title: "Courses",
+    title: "Subject",
+    href: "/dashboard/admin/users",
+    icon: Users,
+  },
+  {
+    title: "Lesson",
+    href: "/dashboard/admin/users",
+    icon: BookOpen,
+  },
+  {
+    title: "Exam",
     href: "/dashboard/admin/courses",
     icon: BookOpen,
   },
   {
-    title: "Settings",
+    title: "lesson",
     href: "/dashboard/admin/settings",
     icon: Settings,
   },
   {
-    title: "Notifications",
+    title: "Assignment",
     href: "/dashboard/admin/notifications",
     icon: Bell,
   },
   {
-    title: "Roles",
+    title: "Result",
+    href: "/dashboard/admin/roles",
+    icon: Shield,
+  },
+  {
+    title: "Attendence",
+    href: "/dashboard/admin/roles",
+    icon: Shield,
+  },
+  {
+    title: "Account",
     href: "/dashboard/admin/roles",
     icon: Shield,
   },
@@ -115,7 +140,8 @@ interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   role: "admin" | "teacher" | "student";
 }
 
-export function SidebarNav({ className, role, ...props }: SidebarNavProps) {
+
+export function SidebarNav({ className, role, ...props }: f) {
   const pathname = usePathname();
   const items = role === "admin" 
     ? adminNavItems 
@@ -123,7 +149,7 @@ export function SidebarNav({ className, role, ...props }: SidebarNavProps) {
     ? teacherNavItems 
     : studentNavItems;
 
-  return (
+  return  (
     <nav
       className={cn(
         "flex flex-col space-y-1",

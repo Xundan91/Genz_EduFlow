@@ -38,6 +38,7 @@ export const authOptions: NextAuthOptions = {
         return { id: user.id, email: user.email, role: "STUDENT" };
       },
     }),
+    
   ],
   callbacks: {
     async jwt({ token, user }: { token: JWT; user?: any }) {

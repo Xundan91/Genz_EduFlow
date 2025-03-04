@@ -15,6 +15,7 @@ export default function Home() {
           </p>
         </div>
         
+        
         <div className="grid gap-4">
           <Link href="/auth/login/student" className="w-full">
             <Button className="w-full h-16" variant="outline" size="lg">
