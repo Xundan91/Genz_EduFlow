@@ -90,12 +90,12 @@ export default function TeacherPage() {
                     <TableCell>{user.courses.join(", ") || "None"}</TableCell>
                     <TableCell>
                       <div className="flex space-x-2">
-                        <Button variant="ghost" size="icon">
+                        {/* <Button variant="ghost" size="icon">
                           <Pencil className="h-4 w-4" />
                         </Button>
                         <Button variant="ghost" size="icon">
                           <Trash2 className="h-4 w-4" />
-                        </Button>
+                        </Button> */}
                         {user.status === "pending" && (
                           <>
                             <Button variant="ghost" size="icon">
