@@ -16,10 +16,10 @@ export async function middleware(req: NextRequest) {
     if (!isAuthenticated || token.role !== "TEACHER") {
       return NextResponse.redirect(new URL("/auth/login/teacher", req.url));
     }
-  } else if (path.startsWith("/dashboard/student")) {
-    if (!isAuthenticated || token.role !== "STUDENT") {
-      return NextResponse.redirect(new URL("/auth/login/student", req.url));
-    }
+  // } else if (path.startsWith("/dashboard/student")) {
+  //   if (!isAuthenticated || token.role !== "STUDENT") {
+  //     return NextResponse.redirect(new URL("/auth/login/student", req.url));
+  //   }
   }
 
   return NextResponse.next();
