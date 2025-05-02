@@ -78,9 +78,9 @@ export default function UsersPage() {
                     <TableCell>{user.name}</TableCell>
                     <TableCell>{user.email}</TableCell>
                     <TableCell>
-                      <Badge variant={user.role === "teacher" ? "default" : "secondary"}>
+                      {/* <Badge variant={user.role === "teacher" ? "default" : "secondary"}>
                         {user.role}
-                      </Badge>
+                      </Badge> */}
                     </TableCell>
                     <TableCell>
                       <Badge >
